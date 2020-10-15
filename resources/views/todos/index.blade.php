@@ -1,54 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-    crossorigin="anonymous">
-    <title>Todos</title>
-</head>
-<body>
+@extends('layouts.app')
 
-   <div class="container">
+@section('title')
+Todos List
+@endsection
 
-        <h1 class="text-center my-5">Todos page</h1>
+@section('content')
 
-        <div class="row justify-content-center">
+<h1 class="text-center my-5">Todos page</h1>
 
-            <div class="col-md-8">
+<div class="row justify-content-center">
 
-                <ul class="list-group">
+    <div class="col-md-8">
 
-                    <div class="card card-default">
+        <ul class="list-group">
 
-                        <div class="card-header">
-                            Todos
-                        </div>
+            <div class="card card-default">
 
-                        <div class="card-body">
+                <div class="card-header">
+                    Todos
+                </div>
 
-                            @foreach($todos as $todo)
+                <div class="card-body">
 
-                            <li class="list-group-item">
-                                {{ $todo->name }}
+                    @foreach($todos as $todo)
 
-                                <button class="btn btn-primary btn-sm float-right">View</button>
-                            </li>
+                    <li class="list-group-item">
+                        {{ $todo->name }}
 
-                            @endforeach
+                        @if(!$todo->completed)
+                        <a href="/todos/{{ $todo->id }}/complete" style="color: white;"
+                           class="btn btn-warning btn-sm float-right">Complete</a>
+                        @endif
 
-                        </div>
+                        <a href="/todos/{{ $todo->id }}" class="btn btn-primary btn-sm float-right mr-2">View</a>
 
-                    </div>
+                    </li>
 
-                </ul>
+                    @endforeach
+
+                </div>
 
             </div>
 
-        </div>
+        </ul>
 
-   </div>
+    </div>
 
-</body>
-</html>
+</div>
+
+@endsection
